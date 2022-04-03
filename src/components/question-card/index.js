@@ -7,9 +7,9 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function getRandomCoef(max) {
+function getRandomCoef(max, allowNegative) {
   const c1 = getRandomInt(max) + 1; // ensure not 0, 1
-  return Math.random() < 0.5 ? -c1 : c1;
+  return (allowNegative && Math.random() < 0.5) ? -c1 : c1 ;
 }
 
 function getRandomPrime() {
@@ -28,7 +28,7 @@ const QuestionCard = ({type}) => {
       }
       case 'sim-equ' : return {
         a : getRandomCoef(9), 
-        b : getRandomCoef(9),
+        b : getRandomCoef(9, true),
         c : getRandomCoef(9),
         d : getRandomCoef(9),
         x : getRandomInt(9) + 2,

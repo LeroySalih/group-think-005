@@ -5,8 +5,15 @@ const SimEqQuestion = ({ a, b, c, d, x, y, showAnswer, onCheck }) => {
   const [xAnswer, setXAnswer] = useState(0);
   const [yAnswer, setYAnswer] = useState(0);
 
+  const formatCoef = (a) => {
+    switch (a) {
+      case 1: return '';
+      case -1: return '-';
+      default: return a;
+    }
+  }
   const eq1 = (a, b, x, y) =>
-    `${a}x ${b > 0 ? "+" : ""} ${b}y = ${a * x + b * y}`;
+    `${formatCoef(a)}x ${b > 0 ? "+" : ""} ${formatCoef(b)}y = ${a * x + b * y}`;
 
   const check = () => {
     return (
