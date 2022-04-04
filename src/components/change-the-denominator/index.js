@@ -1,14 +1,15 @@
 import { MathComponent } from "mathjax-react";
 import {useEffect, useState} from 'react';
+import Button from '@mui/material/Button';
 
 const ChangeTheDenominator = ({ a, b, c, showAnswer, onCheck }) => {
   const [numerator, setNumerator] = useState(0);
-  const [yCoef, setYCoef] = useState(0);
+  const [yCoef, setYCoef] = useState(1);
   const [sign, setSign] = useState('+');
   const [denominator, setDenominator] = useState(1);
 
   useEffect(()=> {
-    setNumerator(0)
+    setNumerator(1)
     setSign('+')
     setYCoef(0)
     setDenominator(1)
@@ -36,30 +37,28 @@ const ChangeTheDenominator = ({ a, b, c, showAnswer, onCheck }) => {
   return (
     <>
       <div className="eq">
-        <MathComponent tex={eq1(a, b, c)} />
+       Write <MathComponent display={false} tex={`${a}x`} /> with a denominator of <MathComponent display={false} tex={`${b}`}/>
       </div>
         <MathComponent tex={eq2(numerator,  denominator)} />
       <div>
 
       </div>
 
-      <div className="answerContainer"> 
-      <div className="rearrange-grid">
-        <div className="numerator"></div>
-        <div className="numerator"><input value={numerator} onChange={(e) => setNumerator(e.target.value)} /></div>
-        <div className="numerator yCoef" >
-            <div style={{fontSize:'150%'}}><MathComponent  tex={'x'}/></div>
-        </div>
-        <div></div>
-        <div><input value={denominator} onChange={(e) => setDenominator(e.target.value)} /></div>
-        <div></div>
+      <div>
+      <FractionInput 
+        numerator={numerator} 
+        denominator={denominator} 
+        onNumeratorChange={setNumerator}
+        onDenominatorChange={setDenominator}
+        />
       </div>
-      </div>
+
+      
     
       
 
       <div style={{display:'flex', justifyContent: 'center'}}>
-        <button onClick={handleCheck}>Check</button>
+        <Button variant="contained" onClick={handleCheck}>Check</Button>
       </div>
       
       <style jsx>
@@ -138,3 +137,28 @@ const ChangeTheDenominator = ({ a, b, c, showAnswer, onCheck }) => {
 
 
 export default ChangeTheDenominator;
+
+
+
+
+const FractionInput = ({numerator, denominator, onNumeratorChange, onDenominatorChange}) => {
+  return (
+    <>
+    <div className="answerContainer"> 
+      <div className="rearrange-grid">
+        <div className="numerator"></div>
+        <div className="numerator"><input value={numerator} onChange={(e) => onNumeratorChange(e.target.value)} /></div>
+        <div className="numerator yCoef" >
+            <div style={{fontSize:'150%'}}><MathComponent  tex={'x'}/></div>
+        </div>
+        <div></div>
+        <div><input value={denominator} onChange={(e) => onDenominatorChange(e.target.value)} /></div>
+        <div></div>
+      </div>
+      </div>
+      <style>
+
+      </style>
+      </>
+  )
+}

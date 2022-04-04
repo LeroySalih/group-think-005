@@ -6,33 +6,60 @@ import {
   Link
 } from "react-router-dom";
 import QuestionCard from './components/question-card';
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from "@mui/material/Typography";
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import Drawer from '@mui/material/Drawer';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
+const drawerWidth = 240;
+ 
 export default function App() {
   return (
     <Router>
       <div>
         <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>&nbsp;|&nbsp;</li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>&nbsp;|&nbsp;</li>
-            <li>
-              <Link to="/make-x-the-subject">Make x the subject</Link>
-            </li>
-            <li>&nbsp;|&nbsp;</li>
-            <li>
-              <Link to="/change-the-denominator">Change the Denominator</Link>
-            </li>
-            <li>&nbsp;|&nbsp;</li>
-            <li>
-              <Link to="/sim-equations">Sim Equations</Link>
-            </li>
-          </ul>
+        <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <Toolbar>
+          <Typography variant="h4" noWrap component="div">
+            Maths Flash Card ⚡
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        variant="permanent"
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+        }}
+      >
+        <Toolbar />
+        <Box sx={{ overflow: 'auto' }}>
+          <List>
+            {[['Make x the subject','/make-x-the-subject'], 
+              ['change the denominator','/change-the-denominator'], 
+              ['Simultaneous equations','/sim-equations']].map((text, index) => (
+              <ListItem button key={text[0]}>
+                <ListItemIcon>
+                  <InboxIcon /> 
+                </ListItemIcon>
+                <Link to={text[1]}>{text[0]}</Link>
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          
+        </Box>
+      </Drawer>
+         
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and

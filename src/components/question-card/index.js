@@ -3,6 +3,11 @@ import SimEqQuestion from '../sim-equations';
 import MakeXTheSubject from '../make-x-the-subject';
 import ChangeTheDenominator from '../change-the-denominator';
 
+import Stack from '@mui/material/Stack'
+import Button from '@mui/material/Button'
+import { Typography } from '@mui/material';
+import Card from '@mui/material/Card';
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
@@ -23,8 +28,8 @@ const QuestionCard = ({type}) => {
 
     switch(type){
       case 'change-the-denominator' : return {
-        a : getRandomCoef(9),
-        b : getRandomInt(9)
+        a : getRandomPrime(9),
+        b : getRandomPrime(9)
       }
       case 'sim-equ' : return {
         a : getRandomCoef(9), 
@@ -75,12 +80,8 @@ const QuestionCard = ({type}) => {
   };
 
   return (
-    <div className="App">
-      <div className="cardTitle">
-        <h1>Math Card</h1>
-        <button onClick={handleNext}>Skip</button>
-      </div>
-
+    <div className="page">
+      <Card className="equation-card">
       { type==="sim-equ" && <SimEqQuestion
         {...question}
         showAnswer={showAnswer}
@@ -103,13 +104,33 @@ const QuestionCard = ({type}) => {
           onCheck={handleCheck}
         />
       }
-
-      <div>
+      <Stack direction={'row'} style={{justifyContent: 'center', margin: '2rem'}}>
+        <Button style={{width:"5rem"}} variant="contained" onClick={handleNext}>Next</Button>
+      </Stack>
+   
       {result && <div className="correct">Correct!</div>}
       {result === false && <div className="incorrect">Incorrect!</div>}
-      </div>
-
+      </Card>
       <style jsx>{`
+
+        .equation-card {
+          width: max-content;
+          padding: 3rem;
+        }
+        .page {
+          
+          height: calc(100vh - 50px);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin-left: 240px;
+          width: calc(100vw - 240px);
+        }
+
+        .question-card{
+          margin-top : 10rem;
+        }
 
         .cardTitle{
           background-color: silver;;

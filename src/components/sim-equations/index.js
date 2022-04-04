@@ -1,6 +1,10 @@
 import { MathComponent } from "mathjax-react";
 import {useState} from 'react';
 
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+
 const SimEqQuestion = ({ a, b, c, d, x, y, showAnswer, onCheck }) => {
   const [xAnswer, setXAnswer] = useState(0);
   const [yAnswer, setYAnswer] = useState(0);
@@ -34,24 +38,16 @@ const SimEqQuestion = ({ a, b, c, d, x, y, showAnswer, onCheck }) => {
         <MathComponent tex={eq1(c, d, x, y)} />
       </div>
 
-      <div className="answerGrid">
+      
           
+        <Stack className="answerBlock" direction="row" spacing={2}>
           
-          <div className="label">
-            x =
-            <input value={xAnswer} onChange={(e) => setXAnswer(e.target.value)} />
-          </div>
+          <TextField label="x =" variant="outlined" value={xAnswer} onChange={(e) => setXAnswer(e.target.value)} />
+          <TextField label="y =" variant="outlined" value={yAnswer} onChange={(e) => setYAnswer(e.target.value)}/>
+          <Button variant="contained" onClick={handleCheck}>Check</Button>
           
-          <div className="label">
-            y =
-            <input value={yAnswer} onChange={(e) => setYAnswer(e.target.value)} />
-          </div>
-
-          <div>
-            <button onClick={handleCheck}>Check</button>
-          </div>
-
-      </div>
+        </Stack>
+      
       
       <style jsx>
         {`
@@ -79,7 +75,8 @@ const SimEqQuestion = ({ a, b, c, d, x, y, showAnswer, onCheck }) => {
             font-size: 3rem;
           }
 
-          .answerGrid{
+          .answerBlock{
+            justify-content: center;
             text-align: center;
           }
 

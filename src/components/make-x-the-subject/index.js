@@ -1,5 +1,6 @@
 import { MathComponent } from "mathjax-react";
 import {useEffect, useState} from 'react';
+import Button from '@mui/material/Button';
 
 const MakeXTheSubjectQuestion = ({ a, b, c, showAnswer, onCheck }) => {
   const [numerator, setNumerator] = useState(0);
@@ -61,7 +62,7 @@ const MakeXTheSubjectQuestion = ({ a, b, c, showAnswer, onCheck }) => {
       
 
       <div style={{display:'flex', justifyContent: 'center'}}>
-        <button onClick={handleCheck}>Check</button>
+        <Button variant="contained" onClick={handleCheck}>Check</Button>
       </div>
       
       <style jsx>
